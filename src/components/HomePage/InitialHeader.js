@@ -9,11 +9,15 @@ function InitialHeader(props) {
     navigate("/login");
   };
 
+  const register = () => {
+    navigate("/register");
+  };
+
   return (
     <div className="header">
       <div className="header-right">
         <button onClick={loginPage}>Login</button>
-        <button className="register" href="#register">
+        <button className="register" onClick={register}>
           Sign up
         </button>
       </div>

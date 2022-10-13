@@ -11,14 +11,16 @@ function Login(props) {
   const navigate = useNavigate();
 
   function login(loginDetails) {
+    localStorage.setItem("userName", username);
+
     axios
       .post(" http://localhost:8080/login", loginDetails)
       .then((response, body) => {
         console.log(response.data);
         if (response.status === 200 && response.data === "Login Successful") {
           console.log(response.data);
+          console.log(username);
           navigate("/homepage");
-          // localStorage.setItem("userData", this.state.loginDetails.userName);
 
           // this.props.history.push("/");
         }

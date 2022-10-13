@@ -1,7 +1,11 @@
 import "./styles/HomePageHeader.css";
 import logo from "../../assets/logo.png";
+import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 function HomePageHeader(props) {
+  const navigate = useNavigate();
+
   function openNav() {
     document.getElementById("mySidenav").style.width = "250px";
   }
@@ -10,6 +14,28 @@ function HomePageHeader(props) {
     document.getElementById("mySidenav").style.width = "0";
   }
 
+  function accountSummary() {
+    var loginDetails = {
+      userName: localStorage.getItem("userName"),
+      password: "",
+    };
+
+    axios
+      .post(" http://localhost:8080/viewAccount", loginDetails)
+      .then((response, body) => {
+        if (response.status === 200) {
+          console.log(response.data);
+          navigate("/accountSummary", { state: response.data });
+        }
+      })
+      .catch(function (error) {
+        // handle error
+        console.log(error);
+      })
+      .then(function () {
+        // always executed
+      });
+  }
   return (
     <div className="header">
       {/* <img className="menu-icon-logo" alt="logo" src={logo} /> */}
@@ -29,6 +55,7 @@ function HomePageHeader(props) {
         <div className="image-container">
           <img className="menu-icon-logo" alt="logo" src={logo} />
         </div>
+        <button onClick={accountSummary}>view account</button>
       </div>
 
       <div className="header-right">
