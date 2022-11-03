@@ -1,5 +1,4 @@
 import { useNavigate } from "react-router-dom";
-import Login from "../Login/Login";
 import "./styles/InitialHeader.css";
 
 function InitialHeader(props) {

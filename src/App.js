@@ -7,6 +7,7 @@ import HomePage from "./components/HomePage/HomePage";
 import LoggedInPage from "./components/HomePage/LoggedInPage";
 import AccountSummary from "./components/AccountSummary/AccountSummary";
 import Register from "./components/Register/Register";
+import RestaurantList from "./components/Restaurant/RestaurantList";
 
 function App() {
   return (
@@ -17,6 +18,7 @@ function App() {
         <Route path="/register" element={<Register />} />
         <Route path="/homepage" element={<LoggedInPage />} />
         <Route path="/accountSummary" element={<AccountSummary />} />
+        <Route path="/restaurantList" element={<RestaurantList />} />
       </Routes>
     </div>
   );

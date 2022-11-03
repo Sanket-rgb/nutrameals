@@ -3,25 +3,41 @@ import Button from "@mui/material/Button";
 import "./styles/HomePageBody.css";
 import SearchIcon from "@material-ui/icons/Search";
 import React, { useState } from "react";
+import axios from "axios";
+import { restrauntNames, foodItems } from "../Resources/RestaurantDetails";
+import RestaurantList from "../Restaurant/RestaurantList";
+import { useNavigate } from "react-router-dom";
 
 function HomePageBody(props) {
   const [restaurantname, setrestaurantName] = useState("");
-  //   state = {
-  //     restaurantDetails: {
-  //       restaurantName: "",
-  //     },
-  //   };
+  const [restaurantList, setRestaurantList] = useState(false);
+  const navigate = useNavigate();
 
   const changeHandlerRestaurantName = (event) => {
     event.persist();
     setrestaurantName(event.target.value);
-    // this.setState((prevState) => ({
-    //   restaurantDetails: {
-    //     ...prevState.restaurantDetails,
-    //     restaurantName: event.target.value,
-    //   },
-    // }));
+    console.log(event.target.value);
   };
+
+  function getRestaurantList() {
+    axios
+      .post(" http://localhost:8080/searchRestaurant", "s")
+      .then((response, body) => {
+        console.log(response.data);
+
+        if (response.data !== null) {
+        }
+        console.log(response);
+      })
+      .catch(function (error) {
+        // handle error
+        console.log(error);
+      })
+      .then(function () {
+        // always executed
+      });
+  }
+
   return (
     <div className="HomePageBody">
       <div>
@@ -33,7 +49,7 @@ function HomePageBody(props) {
       <div className="textfield-div">
         <TextField
           className="textfield"
-          onChange={(value) => this.changeHandlerRestaurantName(value)}
+          onChange={(value) => changeHandlerRestaurantName(value)}
           id="mySearch"
           variant="outlined"
           size="small"
@@ -46,13 +62,6 @@ function HomePageBody(props) {
                   component={Link}
                   to={{
                     pathname: "/searchRestaurant",
-
-                    // state: {
-                    //   restaurantDetails: {
-                    //     restaurantName:
-                    //       this.state.restaurantDetails.restaurantName,
-                    //   },
-                    // },
                   }}
                 >
                   <SearchIcon />
@@ -66,6 +75,7 @@ function HomePageBody(props) {
         <Button
           className="button"
           variant="contained"
+          onClick={() => navigate("/restaurantList")}
           sx={{
             borderRadius: 50,
             backgroundColor: "#21b6ae",
@@ -84,3 +94,4 @@ function HomePageBody(props) {
   );
 }
 export default HomePageBody;
+// {restaurantList && <RestaurantList />}
